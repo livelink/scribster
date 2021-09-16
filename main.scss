@@ -1,0 +1,17 @@
+@import 'glidecss/base';
+@import 'glidecss/reset';
+@import 'glidecss/defaults';
+
+@include theme((
+  radius: .25rem
+));
+
+body {
+  font-family: theme(font, family, sans);
+  min-height: 100vh;
+  @include modes(background, (palette, primary, 5));
+  @include modes(color, (palette, primary, 10));
+  @include modes(border-color, (palette, primary, 4));
+  @include screens(border-width, (DEFAULT: theme(spacing, 4), lg: theme(spacing, 5)));
+  @include screens(padding, (DEFAULT: theme(spacing, 5), lg: theme(spacing, 6)));
+}
