@@ -1,5 +1,5 @@
 const Ably = require('ably');
-const rest = new Ably.Rest({ key: process.env.ABLY_API_KEY });
+const rest = new Ably.Rest(process.env.ABLY_API_KEY);
 
 exports.handler = (_event, _context, callback) => {
   rest.auth.createTokenRequest(
