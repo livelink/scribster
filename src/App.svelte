@@ -1,42 +1,11 @@
 <script>
   import Artboard from './Artboard.svelte';
   import Message from './Message.svelte'
-
-  // import io from 'socket.io-client';
-  const socket = io('ws://localhost:3001');
-
-  let inputMsg;
-  let messages = [];
-
-  function sendMessage(e) {
-    e.preventDefault();
-    if (inputMsg) {
-      socket.emit('chat message', inputMsg);
-      inputMsg = '';
-    }
-  }
-
-  socket.on('chat message', function(msg) {
-    messages = [...messages, msg]
-    window.scrollTo(0, document.body.scrollHeight);
-  });
 </script>
-
 
 <h1 class="heading">Scribster</h1>
 
-<ul>
-  {#each messages as message}
-    <Message body={message} />
-  {/each}
-</ul>
-
 <Artboard />
-
-<form action="" method="POST" on:submit="{ sendMessage }">
-  <input class="input" autocomplete="off" bind:value={ inputMsg } /><button class="button">Send</button>
-</form>
-
 
 <style lang="scss">
 @import 'glidecss/base';

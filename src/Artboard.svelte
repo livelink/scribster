@@ -1,7 +1,12 @@
 <script>
 import { getStroke } from "perfect-freehand";
+import Ably from "ably";
 
-const socket = io('ws://localhost:3001');
+const ably = new Ably.Realtime({
+  authUrl:
+    'https://cocky-cray-cb715b.netlify.app/.netlify/functions/ably-auth-url',
+});
+const drawingChannel = ably.channels.get('drawing');
 
 function getSvgPathFromStroke(stroke) {
   if (!stroke.length) return ""
@@ -21,7 +26,7 @@ function getSvgPathFromStroke(stroke) {
 
 let points = [];
 
-socket.on('drawing', function(newPoints) {
+drawingChannel.subscribe('drawing', function(newPoints) {
   points = [...points, JSON.parse(newPoints)]
 });
 
@@ -34,7 +39,7 @@ function handlePointerMove(e) {
   if (e.buttons === 1) {
     e.preventDefault();
     const point = [e.pageX, e.pageY, e.pressure];
-    socket.emit('drawing', JSON.stringify(point));
+    drawingChannel.publish('drawing', JSON.stringify(point));
   }
 }
 </script>
