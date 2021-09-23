@@ -3,8 +3,7 @@ import { getStroke } from "perfect-freehand";
 import Ably from "ably";
 
 const ably = new Ably.Realtime({
-  authUrl:
-    'https://cocky-cray-cb715b.netlify.app/.netlify/functions/ably-auth-url',
+  authUrl:'https://cocky-cray-cb715b.netlify.app/.netlify/functions/ably-auth-url',
 });
 const drawingChannel = ably.channels.get('drawing');
 
@@ -26,8 +25,8 @@ function getSvgPathFromStroke(stroke) {
 
 let points = [];
 
-drawingChannel.subscribe('drawing', function(newPoints) {
-  points = [...points, JSON.parse(newPoints)]
+drawingChannel.subscribe('drawing', (event) => {
+  points = [...points, JSON.parse(event.data)]
 });
 
 function handlePointerDown(e) {
