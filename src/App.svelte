@@ -1,6 +1,5 @@
 <script>
   import Artboard from './Artboard.svelte';
-  import Message from './Message.svelte'
 </script>
 
 <h1 class="heading">Scribster</h1>

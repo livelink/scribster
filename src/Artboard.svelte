@@ -3,7 +3,7 @@ import { getStroke } from "perfect-freehand";
 import Ably from "ably";
 
 const ably = new Ably.Realtime({
-  authUrl:'https://cocky-cray-cb715b.netlify.app/.netlify/functions/ably-auth-url',
+  authUrl:'https://scribster.netlify.app/.netlify/functions/ably-auth-url',
 });
 const drawingChannel = ably.channels.get('drawing');
 
